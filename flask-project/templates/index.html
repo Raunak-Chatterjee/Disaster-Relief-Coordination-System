@@ -1,0 +1,88 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="max-w-4xl mx-auto py-6 text-center">
+    <!-- Hero Header -->
+    <span class="px-3 py-1 bg-rose-50 text-rose-600 font-mono text-xs font-semibold rounded-full tracking-wider uppercase">Operational Hub</span>
+    <h1 class="text-4xl sm:text-5xl font-extrabold text-slate-900 mt-3 font-display tracking-tight">
+        Disaster Relief Coordination
+    </h1>
+    <p class="text-lg text-slate-600 mt-4 max-w-2xl mx-auto">
+        A real-time response and resource allocation grid designed to connect flood, storm, or landslide victims with active civil defense and volunteer groups instantly.
+    </p>
+
+    <!-- Portal Options Grid -->
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mt-12 text-left">
+        
+        <!-- Victim Card -->
+        <div class="bg-white p-6 rounded-2xl shadow-sm border border-slate-200 hover:shadow-md transition-shadow duration-300 flex flex-col justify-between">
+            <div>
+                <div class="w-12 h-12 bg-rose-100 text-rose-600 rounded-xl flex items-center justify-center font-bold shadow-sm">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"></path>
+                    </svg>
+                </div>
+                <h3 class="text-xl font-bold text-slate-900 mt-5 font-display">Victim Portal</h3>
+                <p class="text-slate-500 text-sm mt-2 leading-relaxed">
+                    If you are affected by an ongoing emergency, submit a quick distress request for food, medical supply, temporary shelter, or rescue assistance. No login required.
+                </p>
+            </div>
+            <a href="/victim" class="mt-8 w-full block text-center py-2.5 bg-rose-600 hover:bg-rose-700 text-white rounded-xl text-sm font-semibold transition-all">
+                Submit Help Request
+            </a>
+        </div>
+
+        <!-- Volunteer Card -->
+        <div class="bg-white p-6 rounded-2xl shadow-sm border border-slate-200 hover:shadow-md transition-shadow duration-300 flex flex-col justify-between">
+            <div>
+                <div class="w-12 h-12 bg-emerald-100 text-emerald-600 rounded-xl flex items-center justify-center font-bold shadow-sm">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"></path>
+                    </svg>
+                </div>
+                <h3 class="text-xl font-bold text-slate-900 mt-5 font-display">Volunteer Grid</h3>
+                <p class="text-slate-500 text-sm mt-2 leading-relaxed">
+                    View active community requests, assign urgent rescue and supply missions to your handle, track items, and mark milestones as completed to keep logistics current.
+                </p>
+            </div>
+            <a href="/volunteer" class="mt-8 w-full block text-center py-2.5 bg-slate-900 hover:bg-slate-800 text-white rounded-xl text-sm font-semibold transition-all">
+                Enter Volunteer Dashboard
+            </a>
+        </div>
+
+        <!-- Admin Card -->
+        <div class="bg-white p-6 rounded-2xl shadow-sm border border-slate-200 hover:shadow-md transition-shadow duration-300 flex flex-col justify-between">
+            <div>
+                <div class="w-12 h-12 bg-sky-100 text-sky-600 rounded-xl flex items-center justify-center font-bold shadow-sm">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"></path>
+                    </svg>
+                </div>
+                <h3 class="text-xl font-bold text-slate-900 mt-5 font-display">Command Center</h3>
+                <p class="text-slate-500 text-sm mt-2 leading-relaxed">
+                    For coordinators and incident commanders. Access full-scale request filters, assign priorities, manage security rules, and observe live stats cards.
+                </p>
+            </div>
+            <a href="/admin" class="mt-8 w-full block text-center py-2.5 bg-sky-600 hover:bg-sky-700 text-white rounded-xl text-sm font-semibold transition-all">
+                Open Admin Console
+            </a>
+        </div>
+
+    </div>
+
+    <!-- Quick Credentials Helper -->
+    <div class="mt-12 p-4 bg-slate-100 border border-slate-200 rounded-2xl text-left">
+        <h4 class="text-xs font-semibold text-slate-700 font-mono tracking-wider uppercase">Testing Credentials Guide</h4>
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 mt-3 text-xs text-slate-600">
+            <div>
+                <span class="block font-semibold text-slate-800">Admin Account:</span>
+                <span class="font-mono">Username: <strong class="text-slate-900">admin</strong> / Password: <strong class="text-slate-900">admin123</strong></span>
+            </div>
+            <div>
+                <span class="block font-semibold text-slate-800">Volunteer Account:</span>
+                <span class="font-mono">Username: <strong class="text-slate-900">volunteer1</strong> / Password: <strong class="text-slate-900">volunteer123</strong></span>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

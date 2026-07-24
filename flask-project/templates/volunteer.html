@@ -1,0 +1,161 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="space-y-6">
+    <!-- Header banner -->
+    <div class="bg-slate-900 text-white p-6 rounded-2xl flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 border border-slate-800">
+        <div>
+            <span class="px-2.5 py-0.5 bg-emerald-500/10 text-emerald-400 font-mono text-[10px] font-bold rounded-full tracking-wider uppercase">Active Responder Session</span>
+            <h2 class="text-2xl font-bold font-display mt-1">Volunteer Dispatch Grid</h2>
+            <p class="text-slate-400 text-xs mt-0.5 font-mono">Responder Handle: <strong class="text-white">{{ username }}</strong></p>
+        </div>
+        <div class="flex items-center gap-2">
+            <span class="flex h-2 w-2 relative">
+                <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
+                <span class="relative inline-flex rounded-full h-2 w-2 bg-emerald-500"></span>
+            </span>
+            <span class="text-xs text-emerald-400 font-medium font-mono">Live Sync Connected</span>
+        </div>
+    </div>
+
+    <!-- Filters & Search Toolbar -->
+    <div class="bg-white p-4 rounded-xl shadow-sm border border-slate-200 flex flex-col md:flex-row md:items-center md:justify-between gap-4">
+        <!-- Status Filter Tags -->
+        <div class="flex flex-wrap gap-2">
+            <a href="/volunteer?status=All&search={{ search }}" class="px-3.5 py-1.5 rounded-lg text-xs font-semibold transition-all {% if current_status == 'All' %} bg-slate-900 text-white {% else %} bg-slate-50 text-slate-600 hover:bg-slate-100 {% endif %}">
+                All Requests
+            </a>
+            <a href="/volunteer?status=Pending&search={{ search }}" class="px-3.5 py-1.5 rounded-lg text-xs font-semibold transition-all {% if current_status == 'Pending' %} bg-amber-500 text-white {% else %} bg-slate-50 text-slate-600 hover:bg-slate-100 {% endif %}">
+                Pending Unclaimed
+            </a>
+            <a href="/volunteer?status=Assigned&search={{ search }}" class="px-3.5 py-1.5 rounded-lg text-xs font-semibold transition-all {% if current_status == 'Assigned' %} bg-sky-600 text-white {% else %} bg-slate-50 text-slate-600 hover:bg-slate-100 {% endif %}">
+                My Assigned
+            </a>
+            <a href="/volunteer?status=Completed&search={{ search }}" class="px-3.5 py-1.5 rounded-lg text-xs font-semibold transition-all {% if current_status == 'Completed' %} bg-emerald-600 text-white {% else %} bg-slate-50 text-slate-600 hover:bg-slate-100 {% endif %}">
+                Completed
+            </a>
+        </div>
+
+        <!-- Search input form -->
+        <form action="/volunteer" method="GET" class="flex items-center gap-2 max-w-sm w-full">
+            <input type="hidden" name="status" value="{{ current_status }}">
+            <div class="relative w-full">
+                <input type="text" name="search" value="{{ search }}" placeholder="Search name, location, or details..."
+                    class="w-full px-3.5 py-1.5 bg-slate-50 border border-slate-200 rounded-lg text-xs focus:outline-none focus:ring-2 focus:ring-slate-900 transition-all">
+                {% if search %}
+                    <a href="/volunteer?status={{ current_status }}&search=" class="absolute right-2.5 top-2 text-slate-400 hover:text-slate-600 text-xs font-bold">✕</a>
+                {% endif %}
+            </div>
+            <button type="submit" class="px-3.5 py-1.5 bg-slate-900 hover:bg-slate-800 text-white text-xs font-semibold rounded-lg transition-all">
+                Search
+            </button>
+        </form>
+    </div>
+
+    <!-- Active Grid List -->
+    {% if requests %}
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+            {% for r in requests %}
+                <div class="bg-white rounded-2xl shadow-sm border border-slate-200 hover:border-slate-300 transition-all p-6 flex flex-col justify-between">
+                    <div>
+                        <!-- Header Line inside Card -->
+                        <div class="flex items-center justify-between border-b border-slate-100 pb-3 mb-4">
+                            <span class="px-2.5 py-0.5 bg-slate-100 text-slate-700 font-mono text-[10px] font-bold rounded-md uppercase tracking-wider">
+                                {{ r.help_type }}
+                            </span>
+                            
+                            <!-- Badges -->
+                            <div class="flex items-center gap-2">
+                                <!-- Priority Badge -->
+                                {% if r.priority == 'High' %}
+                                    <span class="px-2 py-0.5 bg-rose-50 text-rose-600 text-[10px] font-bold rounded-md">HIGH</span>
+                                {% elif r.priority == 'Medium' %}
+                                    <span class="px-2 py-0.5 bg-amber-50 text-amber-600 text-[10px] font-bold rounded-md">MEDIUM</span>
+                                {% else %}
+                                    <span class="px-2 py-0.5 bg-slate-50 text-slate-500 text-[10px] font-bold rounded-md">LOW</span>
+                                {% endif %}
+
+                                <!-- Status Badge -->
+                                {% if r.status == 'Pending' %}
+                                    <span class="px-2 py-0.5 bg-amber-500 text-white text-[10px] font-bold rounded-md">PENDING</span>
+                                {% elif r.status == 'Assigned' %}
+                                    <span class="px-2 py-0.5 bg-sky-600 text-white text-[10px] font-bold rounded-md">ASSIGNED</span>
+                                {% else %}
+                                    <span class="px-2 py-0.5 bg-emerald-600 text-white text-[10px] font-bold rounded-md">COMPLETED</span>
+                                {% endif %}
+                            </div>
+                        </div>
+
+                        <!-- Body details -->
+                        <div class="space-y-3.5">
+                            <div>
+                                <h4 class="text-sm font-semibold text-slate-500 font-mono text-[10px] uppercase tracking-wider">Victim / Recipient</h4>
+                                <p class="text-base font-bold text-slate-900 mt-0.5">{{ r.name }}</p>
+                            </div>
+
+                            <div>
+                                <h4 class="text-sm font-semibold text-slate-500 font-mono text-[10px] uppercase tracking-wider">Location / Shelter Coordinates</h4>
+                                <p class="text-sm font-medium text-slate-700 mt-0.5">{{ r.location }}</p>
+                            </div>
+
+                            <div>
+                                <h4 class="text-sm font-semibold text-slate-500 font-mono text-[10px] uppercase tracking-wider">Contact Number</h4>
+                                <p class="text-sm font-mono text-slate-800 font-semibold mt-0.5">{{ r.contact }}</p>
+                            </div>
+
+                            <div>
+                                <h4 class="text-sm font-semibold text-slate-500 font-mono text-[10px] uppercase tracking-wider">Requested Description</h4>
+                                <p class="text-sm text-slate-600 mt-1 leading-relaxed bg-slate-50 p-3 rounded-lg border border-slate-100">
+                                    {{ r.description }}
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Actions Area inside Card -->
+                    <div class="mt-6 pt-4 border-t border-slate-100 flex items-center justify-between">
+                        <!-- Date details -->
+                        <span class="text-[10px] text-slate-400 font-mono">
+                            Logged: {{ r.created_at[:16] }}
+                        </span>
+
+                        <!-- Action triggers -->
+                        <div>
+                            {% if r.status == 'Pending' %}
+                                <form action="/volunteer/update/{{ r.id }}" method="POST">
+                                    <input type="hidden" name="action" value="accept">
+                                    <button type="submit" class="px-4 py-2 bg-slate-900 hover:bg-slate-800 text-white text-xs font-bold rounded-lg transition-all shadow-sm">
+                                        Accept & Claim Task
+                                    </button>
+                                </form>
+                            {% elif r.status == 'Assigned' %}
+                                {% if r.assigned_volunteer == username %}
+                                    <form action="/volunteer/update/{{ r.id }}" method="POST">
+                                        <input type="hidden" name="action" value="complete">
+                                        <button type="submit" class="px-4 py-2 bg-emerald-600 hover:bg-emerald-700 text-white text-xs font-bold rounded-lg transition-all shadow-sm">
+                                            Mark as Completed
+                                        </button>
+                                    </form>
+                                {% else %}
+                                    <span class="text-xs text-slate-400 font-semibold font-mono">Claimed by: {{ r.assigned_volunteer }}</span>
+                                {% endif %}
+                            {% else %}
+                                <div class="flex items-center gap-1.5 text-emerald-600 text-xs font-bold font-mono">
+                                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                                    </svg>
+                                    Fulfilled by {{ r.assigned_volunteer }}
+                                </div>
+                            {% endif %}
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    {% else %}
+        <div class="bg-white rounded-2xl p-12 text-center border border-slate-200">
+            <p class="text-slate-400 text-sm">No disaster aid requests found matching your current filter.</p>
+        </div>
+    {% endif %}
+</div>
+{% endblock %}

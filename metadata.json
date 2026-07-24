@@ -1,0 +1,6 @@
+{
+  "name": "Disaster Relief Coordination System",
+  "description": "A comprehensive coordination platform for disaster relief, featuring portals for victims to request aid, volunteers to claim and fulfill requests, and admins to monitor operations with live analytics.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

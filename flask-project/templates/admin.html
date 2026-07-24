@@ -1,0 +1,205 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="space-y-8">
+    <!-- Header banner -->
+    <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
+        <div>
+            <span class="px-2.5 py-1 bg-sky-50 text-sky-600 font-mono text-xs font-semibold rounded-full uppercase tracking-wider">Incident Commander Panel</span>
+            <h2 class="text-3xl font-extrabold text-slate-900 mt-2 font-display">Relief Dispatch Center</h2>
+            <p class="text-slate-500 text-sm mt-0.5">Real-time oversight of resource distribution, pending alerts, and volunteer tasks.</p>
+        </div>
+
+        <!-- Database control buttons -->
+        <div class="flex items-center gap-3">
+            <form action="/admin/reset-db" method="POST" onsubmit="return confirm('WARNING: This will completely wipe and reset the SQLite database to its initial testing seed state. Proceed?');">
+                <button type="submit" class="px-4 py-2 bg-rose-50 hover:bg-rose-100 text-rose-700 border border-rose-200 text-xs font-semibold rounded-xl transition-all flex items-center gap-1.5">
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 1121.21 15H18M9 11l3-3m0 0l3 3m-3-3v12"></path>
+                    </svg>
+                    Reset SQLite DB
+                </button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Statistics Cards Grid -->
+    <div class="grid grid-cols-2 lg:grid-cols-5 gap-4">
+        <!-- Card: Total Requests -->
+        <div class="bg-white p-5 rounded-2xl shadow-sm border border-slate-200">
+            <span class="block text-slate-400 font-mono text-[10px] font-semibold uppercase tracking-wider">Total Incidents</span>
+            <span class="block text-3xl font-black text-slate-900 mt-1 font-display">{{ stats.total }}</span>
+            <div class="h-1 w-full bg-slate-100 rounded-full mt-3 overflow-hidden">
+                <div class="h-full bg-slate-400" style="width: 100%"></div>
+            </div>
+        </div>
+
+        <!-- Card: Pending -->
+        <div class="bg-white p-5 rounded-2xl shadow-sm border border-slate-200">
+            <span class="block text-slate-400 font-mono text-[10px] font-semibold uppercase tracking-wider">Pending (Urgent)</span>
+            <span class="block text-3xl font-black text-amber-500 mt-1 font-display">{{ stats.pending }}</span>
+            <div class="h-1 w-full bg-slate-100 rounded-full mt-3 overflow-hidden">
+                <div class="h-full bg-amber-500" style="width: {% if stats.total > 0 %}{{ (stats.pending / stats.total) * 100 }}{% else %}0{% endif %}%"></div>
+            </div>
+        </div>
+
+        <!-- Card: Assigned -->
+        <div class="bg-white p-5 rounded-2xl shadow-sm border border-slate-200">
+            <span class="block text-slate-400 font-mono text-[10px] font-semibold uppercase tracking-wider">Assigned Active</span>
+            <span class="block text-3xl font-black text-sky-600 mt-1 font-display">{{ stats.assigned }}</span>
+            <div class="h-1 w-full bg-slate-100 rounded-full mt-3 overflow-hidden">
+                <div class="h-full bg-sky-600" style="width: {% if stats.total > 0 %}{{ (stats.assigned / stats.total) * 100 }}{% else %}0{% endif %}%"></div>
+            </div>
+        </div>
+
+        <!-- Card: Completed -->
+        <div class="bg-white p-5 rounded-2xl shadow-sm border border-slate-200">
+            <span class="block text-slate-400 font-mono text-[10px] font-semibold uppercase tracking-wider">Fulfilled Aid</span>
+            <span class="block text-3xl font-black text-emerald-600 mt-1 font-display">{{ stats.completed }}</span>
+            <div class="h-1 w-full bg-slate-100 rounded-full mt-3 overflow-hidden">
+                <div class="h-full bg-emerald-600" style="width: {% if stats.total > 0 %}{{ (stats.completed / stats.total) * 100 }}{% else %}0{% endif %}%"></div>
+            </div>
+        </div>
+
+        <!-- Card: Volunteers -->
+        <div class="bg-white p-5 rounded-2xl shadow-sm border border-slate-200 col-span-2 lg:col-span-1">
+            <span class="block text-slate-400 font-mono text-[10px] font-semibold uppercase tracking-wider">Active Volunteers</span>
+            <span class="block text-3xl font-black text-indigo-600 mt-1 font-display">{{ stats.volunteers }}</span>
+            <div class="h-1 w-full bg-slate-100 rounded-full mt-3 overflow-hidden">
+                <div class="h-full bg-indigo-600" style="width: 100%"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Filters & Search Toolbar -->
+    <div class="bg-white p-5 rounded-2xl shadow-sm border border-slate-200">
+        <form action="/admin" method="GET" class="grid grid-cols-1 md:grid-cols-4 gap-4 items-end">
+            <!-- Search field -->
+            <div>
+                <label class="block text-slate-400 font-mono text-[10px] font-semibold uppercase tracking-wider mb-1.5">Free Search</label>
+                <input type="text" name="search" value="{{ search }}" placeholder="Search name, landmark..."
+                    class="w-full px-3 py-2 bg-slate-50 border border-slate-200 rounded-xl text-xs focus:outline-none focus:ring-2 focus:ring-slate-900 focus:bg-white transition-all">
+            </div>
+
+            <!-- Status Filter -->
+            <div>
+                <label class="block text-slate-400 font-mono text-[10px] font-semibold uppercase tracking-wider mb-1.5">Filter by Status</label>
+                <select name="status" class="w-full px-3 py-2 bg-slate-50 border border-slate-200 rounded-xl text-xs focus:outline-none focus:ring-2 focus:ring-slate-900 focus:bg-white transition-all">
+                    <option value="All" {% if current_status == 'All' %}selected{% endif %}>All Statuses</option>
+                    <option value="Pending" {% if current_status == 'Pending' %}selected{% endif %}>Pending</option>
+                    <option value="Assigned" {% if current_status == 'Assigned' %}selected{% endif %}>Assigned</option>
+                    <option value="Completed" {% if current_status == 'Completed' %}selected{% endif %}>Completed</option>
+                </select>
+            </div>
+
+            <!-- Priority Filter -->
+            <div>
+                <label class="block text-slate-400 font-mono text-[10px] font-semibold uppercase tracking-wider mb-1.5">Filter by Priority</label>
+                <select name="priority" class="w-full px-3 py-2 bg-slate-50 border border-slate-200 rounded-xl text-xs focus:outline-none focus:ring-2 focus:ring-slate-900 focus:bg-white transition-all">
+                    <option value="All" {% if current_priority == 'All' %}selected{% endif %}>All Priorities</option>
+                    <option value="High" {% if current_priority == 'High' %}selected{% endif %}>High Urgency</option>
+                    <option value="Medium" {% if current_priority == 'Medium' %}selected{% endif %}>Medium Urgency</option>
+                    <option value="Low" {% if current_priority == 'Low' %}selected{% endif %}>Low Urgency</option>
+                </select>
+            </div>
+
+            <!-- Submit buttons -->
+            <div class="flex gap-2">
+                <button type="submit" class="flex-grow py-2 bg-slate-900 hover:bg-slate-800 text-white text-xs font-semibold rounded-xl transition-all">
+                    Apply Filters
+                </button>
+                <a href="/admin" class="px-3 py-2 bg-slate-100 hover:bg-slate-200 text-slate-700 text-xs font-semibold rounded-xl transition-all text-center">
+                    Reset
+                </a>
+            </div>
+        </form>
+    </div>
+
+    <!-- Requests Data Table -->
+    <div class="bg-white rounded-2xl border border-slate-200 shadow-sm overflow-hidden">
+        <div class="px-6 py-4 border-b border-slate-100 flex items-center justify-between bg-slate-50">
+            <h3 class="font-bold text-slate-900 font-display">Aid Request Database logs</h3>
+            <span class="text-xs text-slate-400 font-mono">Found {{ requests|length }} matching rows</span>
+        </div>
+
+        <div class="overflow-x-auto">
+            <table class="w-full text-left border-collapse">
+                <thead>
+                    <tr class="border-b border-slate-200 bg-slate-100/50 text-[10px] text-slate-400 font-mono uppercase tracking-wider">
+                        <th class="px-6 py-3 font-semibold">Incident ID</th>
+                        <th class="px-6 py-3 font-semibold">Victim / Contact</th>
+                        <th class="px-6 py-3 font-semibold">Location</th>
+                        <th class="px-6 py-3 font-semibold">Assistance Type</th>
+                        <th class="px-6 py-3 font-semibold">Priority</th>
+                        <th class="px-6 py-3 font-semibold">Status</th>
+                        <th class="px-6 py-3 font-semibold">Assigned Responder</th>
+                    </tr>
+                </thead>
+                <tbody class="divide-y divide-slate-100 text-xs">
+                    {% if requests %}
+                        {% for r in requests %}
+                            <tr class="hover:bg-slate-50/75 transition-colors">
+                                <td class="px-6 py-4 font-mono font-medium text-slate-500">
+                                    #{{ r.id }}
+                                </td>
+                                <td class="px-6 py-4">
+                                    <div class="font-bold text-slate-900">{{ r.name }}</div>
+                                    <div class="text-[10px] text-slate-400 font-mono">{{ r.contact }}</div>
+                                </td>
+                                <td class="px-6 py-4 text-slate-600 max-w-xs truncate">
+                                    {{ r.location }}
+                                </td>
+                                <td class="px-6 py-4">
+                                    <span class="px-2 py-0.5 bg-slate-100 text-slate-700 font-semibold rounded-md">
+                                        {{ r.help_type }}
+                                    </span>
+                                </td>
+                                <td class="px-6 py-4">
+                                    {% if r.priority == 'High' %}
+                                        <span class="px-2.5 py-1 bg-rose-50 text-rose-700 font-bold rounded-md text-[10px] uppercase">High</span>
+                                    {% elif r.priority == 'Medium' %}
+                                        <span class="px-2.5 py-1 bg-amber-50 text-amber-700 font-bold rounded-md text-[10px] uppercase">Medium</span>
+                                    {% else %}
+                                        <span class="px-2.5 py-1 bg-emerald-50 text-emerald-700 font-bold rounded-md text-[10px] uppercase">Low</span>
+                                    {% endif %}
+                                </td>
+                                <td class="px-6 py-4">
+                                    {% if r.status == 'Pending' %}
+                                        <span class="inline-flex items-center gap-1.5 px-2.5 py-1 bg-amber-100 text-amber-800 rounded-full font-semibold text-[10px]">
+                                            <span class="h-1.5 w-1.5 rounded-full bg-amber-500"></span>
+                                            Pending
+                                        </span>
+                                    {% elif r.status == 'Assigned' %}
+                                        <span class="inline-flex items-center gap-1.5 px-2.5 py-1 bg-sky-100 text-sky-800 rounded-full font-semibold text-[10px]">
+                                            <span class="h-1.5 w-1.5 rounded-full bg-sky-500"></span>
+                                            Assigned
+                                        </span>
+                                    {% else %}
+                                        <span class="inline-flex items-center gap-1.5 px-2.5 py-1 bg-emerald-100 text-emerald-800 rounded-full font-semibold text-[10px]">
+                                            <span class="h-1.5 w-1.5 rounded-full bg-emerald-500"></span>
+                                            Completed
+                                        </span>
+                                    {% endif %}
+                                </td>
+                                <td class="px-6 py-4 font-mono font-medium">
+                                    {% if r.assigned_volunteer %}
+                                        <span class="text-indigo-600 font-bold">{{ r.assigned_volunteer }}</span>
+                                    {% else %}
+                                        <span class="text-slate-300 italic">Unclaimed</span>
+                                    {% endif %}
+                                </td>
+                            </tr>
+                        {% endfor %}
+                    {% else %}
+                        <tr>
+                            <td colspan="7" class="px-6 py-12 text-center text-slate-400">
+                                No records found matching the active dashboard filters.
+                            </td>
+                        </tr>
+                    {% endif %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+{% endblock %}
