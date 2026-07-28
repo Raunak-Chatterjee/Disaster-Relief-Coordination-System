@@ -266,25 +266,9 @@ export default function App() {
             Admin Dashboard
           </button>
 
-          <div className="px-6 py-2 mt-6 text-[10px] font-bold text-slate-500 uppercase tracking-widest font-mono">System Codebase</div>
+          
 
-          {/* Flask Files Code Tree */}
-          <button
-            onClick={() => setActiveTab('flask-code')}
-            className={`w-full flex items-center px-6 py-3 text-xs transition-colors text-left font-medium ${
-              activeTab === 'flask-code' 
-                ? 'bg-slate-800 border-r-4 border-indigo-500 text-white' 
-                : 'text-slate-400 hover:bg-slate-800 hover:text-white'
-            }`}
-          >
-            <span className="w-4 h-4 mr-3 opacity-80 flex items-center justify-center">
-              <Terminal className={`w-4 h-4 ${activeTab === 'flask-code' ? 'text-indigo-400' : 'text-slate-500'}`} />
-            </span>
-            Flask Project files
-            <span className="ml-auto bg-slate-800 border border-slate-700 text-slate-400 text-[10px] px-1.5 py-0.5 rounded-full font-mono">
-              {FLASK_PROJECT_FILES.length}
-            </span>
-          </button>
+         
         </nav>
 
         {/* Sidebar Status Footer */}
