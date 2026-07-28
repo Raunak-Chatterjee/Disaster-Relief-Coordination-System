@@ -1033,11 +1033,7 @@ export default function App() {
           </AnimatePresence>
         </div>
 
-        {/* COMPACT FOOTER */}
-        <footer className="bg-white border-t border-slate-200 py-3 text-center text-[10px] text-slate-400 font-mono shrink-0">
-          <p>&copy; 2026 Disaster Relief Coordination Platform (RESQUE). All rights reserved.</p>
-          <p className="text-[9px] text-slate-300">Preview Engine: Express + React 19 | Local Mini-Project Target: Python Flask + SQLite</p>
-        </footer>
+      
       </main>
     </div>
   );
