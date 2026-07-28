@@ -408,7 +408,7 @@ export default function App() {
                             required
                             value={vicLocation}
                             onChange={e => setVicLocation(e.target.value)}
-                            placeholder="e.g. Riverside Drive (Zone A-4), or North Gym Cot #14"
+                            placeholder="e.g. Beltola, Guwahati, Assam, or Flood Relief Camp, Tezpur, Assam"
                             className="w-full pl-9 pr-3 py-2 bg-white border border-slate-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500/20 focus:border-indigo-500 transition-all placeholder:text-slate-400 text-xs"
                           />
                         </div>
@@ -426,7 +426,7 @@ export default function App() {
                               required
                               value={vicContact}
                               onChange={e => setVicContact(e.target.value)}
-                              placeholder="e.g. +1 (555) 012-4433"
+                              placeholder="e.g. +91 98765 43210"
                               className="w-full pl-9 pr-3 py-2 bg-white border border-slate-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500/20 focus:border-indigo-500 transition-all placeholder:text-slate-400 text-xs"
                             />
                           </div>
@@ -531,10 +531,10 @@ export default function App() {
                       onChange={e => setCurrentVolunteer(e.target.value)}
                       className="bg-slate-800 text-white border border-slate-700 rounded px-2.5 py-1 text-xs font-mono font-semibold focus:outline-none"
                     >
-                      <option value="volunteer1">volunteer1 (Preseeded)</option>
-                      <option value="volunteer2">volunteer2 (Preseeded)</option>
-                      <option value="Responder David">David (Field Leader)</option>
-                      <option value="Rescue Squad Charlie">Rescue Squad Charlie</option>
+                      <option value="volunteer1">volunteer1</option>
+                      <option value="volunteer2">volunteer2</option>
+                      <option value="Responder Goutham">Goutham (Field Leader)</option>
+                      <option value="Rescue Squad">Rescue Squad</option>
                     </select>
                   </div>
                 </div>

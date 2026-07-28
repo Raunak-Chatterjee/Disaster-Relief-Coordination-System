@@ -67,7 +67,7 @@ function getSampleData(): ReliefRequest[] {
       priority: 'High',
       description: 'Elderly resident needs essential insulin refills and basic first aid bandages. Floodwaters block the main road.',
       status: 'Assigned',
-      assigned_volunteer: 'Volunteer Mark',
+      assigned_volunteer: 'Volunteer Ravi',
       created_at: new Date(Date.now() - 8 * 3600 * 1000).toISOString() // 8 hours ago
     },
     {
@@ -79,7 +79,7 @@ function getSampleData(): ReliefRequest[] {
       priority: 'Medium',
       description: 'Displaced after roof collapse. Requiring blankets, dry clothes, and baby formula for an 8-month-old.',
       status: 'Completed',
-      assigned_volunteer: 'Volunteer Sarah',
+      assigned_volunteer: 'Volunteer Rohit',
       created_at: new Date(Date.now() - 18 * 3600 * 1000).toISOString() // 18 hours ago
     },
     {
