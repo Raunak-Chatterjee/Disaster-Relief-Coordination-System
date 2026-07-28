@@ -77,19 +77,19 @@ def init_db():
     if cursor.fetchone()[0] == 0:
         requests_seed = [
             (
-                'Sarah Jenkins',
-                'Sector 4, West End (Near Community Park)',
-                '+1 (555) 019-2834',
+                'Rahul Sharma',
+                'Beltola, Guwahati, Assam (Near Community Park)',
+                '+91 98765 43210',
                 'Food & Water',
                 'High',
-                'Family of 4 without clean drinking water and food since the main water line burst last night.',
+                'Family of four stranded due to severe flooding. Immediate drinking water and food supplies are required.',
                 'Pending',
                 None
             ),
             (
-                'Robert Diaz',
-                'Apartment 3B, 112 Riverside Avenue',
-                '+1 (555) 014-9982',
+                'Priya Das',
+                'Silchar, Assam',
+                '+91 91234 56789',
                 'Medical Supplies',
                 'High',
                 'Elderly resident needs essential insulin refills and basic first aid bandages. Floodwaters block the main road.',
@@ -97,9 +97,9 @@ def init_db():
                 'volunteer1'
             ),
             (
-                'The Martinez Family',
-                'North Gym Shelter (Cot #14)',
-                '+1 (555) 012-7364',
+                'The Arjun Singh',
+                'Flood Relief Camp, Tezpur, Assam',
+                '+91 70021 45678',
                 'Shelter & Clothing',
                 'Medium',
                 'Displaced after roof collapse. Requiring blankets, dry clothes, and baby formula for an 8-month-old.',
@@ -107,9 +107,9 @@ def init_db():
                 'volunteer2'
             ),
             (
-                'Elena Rostova',
-                'Block C, Oakridge Subdivison',
-                '+1 (555) 018-4721',
+                'Riya Chatterjee',
+                'Dibrugarh, Assam',
+                '+91 86384 98765',
                 'Search & Rescue',
                 'High',
                 'Reporting rising water levels around the ground floor. Need guidance or evacuation assistance before nightfall.',
@@ -117,9 +117,9 @@ def init_db():
                 None
             ),
             (
-                'Marcus Brody',
-                'Intersection of Elm & 5th St',
-                '+1 (555) 011-2358',
+                'Abhijeet Bhattacharya',
+                'Jorhat, Assam',
+                '+91 86384 98456',
                 'Other Support',
                 'Low',
                 'Downed powerlines and tree branches blocking the secondary driveway. No active hazard but limits vehicle exit.',
@@ -351,7 +351,7 @@ if __name__ == '__main__':
     <nav class="bg-slate-900 text-white py-4 shadow-md">
         <div class="max-w-7xl mx-auto px-4 flex justify-between items-center">
             <a href="/" class="font-bold text-lg flex items-center gap-2">
-                <span class="p-1.5 bg-rose-600 rounded text-xs font-mono">RESQUE</span>
+                <span class="p-1.5 bg-rose-600 rounded text-xs font-mono">Disaster Relief Coordination System</span>
                 <span>Relief Grid</span>
             </a>
             <div class="flex items-center gap-4 text-sm">
@@ -505,10 +505,10 @@ if __name__ == '__main__':
     <div class="flex justify-between items-center">
         <div>
             <h2 class="text-2xl font-bold font-display">Command & Dispatch</h2>
-            <p class="text-xs text-slate-500">Live operational database monitoring.</p>
+            <p class="text-xs text-slate-500">Monitor and manage disaster relief requests in real time.</p>
         </div>
         <form action="/admin/reset-db" method="POST">
-            <button type="submit" class="bg-rose-50 border border-rose-200 text-rose-700 text-xs px-3 py-1.5 rounded">Reset SQLite DB</button>
+            <button type="submit" class="bg-rose-50 border border-rose-200 text-rose-700 text-xs px-3 py-1.5 rounded">Reset Database</button>
         </form>
     </div>
 

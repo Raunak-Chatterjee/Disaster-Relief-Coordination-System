@@ -1,4 +1,4 @@
-# Disaster Relief Coordination Platform (RESQUE)
+# Disaster Relief Coordination Platform (Disaster Relief Coordination System)
 
 An engineering mini-project demonstrating a fully integrated **Disaster Relief Coordination System** built using **Python Flask**, **SQLite3**, and **Tailwind CSS**.
 
@@ -99,13 +99,13 @@ The project includes a unified scenario that showcases full-stack SQLite transac
 
 1. **Submit Distress Form**:
    - Go to `http://127.0.0.1:5000/victim`.
-   - Submit a request under Name: **"Sarah Jenkins"**, Location: **"Sector 4, West End"**, Help Type: **"Food & Water"**, Priority: **"High"**.
+   - Submit a request under Name: **"Rahul Sharma"**, Location: **"Beltola, Guwahati, Assam"**, Help Type: **"Food & Water"**, Priority: **"High"**.
    - Press **"Submit Assistance Request"**. A success message will appear, and a new record will be safely inserted into the SQLite `requests` table with status **Pending**.
 
 2. **Claim Request (Volunteer Role)**:
    - Click **"Portal Login"** in the navbar and log in with username `volunteer1` and password `volunteer123`.
    - You will be redirected to the **Volunteer Dispatch Grid**.
-   - Notice the **Sarah Jenkins** food request has appeared. Click **"Accept & Claim Task"**.
+   - Notice the **Rahul Sharma** food request has appeared. Click **"Accept & Claim Task"**.
    - The task moves to the assigned section. The backend queries SQLite and sets the request status to **Assigned**, linking the volunteer handle `volunteer1` as the owner.
 
 3. **Fulfill & Complete Request**:
@@ -115,4 +115,4 @@ The project includes a unified scenario that showcases full-stack SQLite transac
 4. **Verify on Admin Panel**:
    - Log out of your volunteer session, then click **"Portal Login"** again.
    - Sign in using administrator credentials (`admin` / `admin123`).
-   - Observe the live KPI counter update automatically. You will see **Sarah Jenkins**' request registered as **Completed**, with full logs visible inside the admin requests logs table!
+   - Observe the live KPI counter update automatically. You will see **Rahul Sharma**' request registered as **Completed**, with full logs visible inside the admin requests logs table!

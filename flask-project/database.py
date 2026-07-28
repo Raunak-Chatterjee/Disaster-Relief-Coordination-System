@@ -64,19 +64,19 @@ def init_db():
     if cursor.fetchone()[0] == 0:
         requests_seed = [
             (
-                'Sarah Jenkins',
-                'Sector 4, West End (Near Community Park)',
-                '+1 (555) 019-2834',
+                'Rahul Sharma',
+                'Beltola, Guwahati, Assam (Near Community Park)',
+                '+91 98765 43210',
                 'Food & Water',
                 'High',
-                'Family of 4 without clean drinking water and food since the main water line burst last night.',
+                'Family of four stranded due to severe flooding. Immediate drinking water and food supplies are required.',
                 'Pending',
                 None
             ),
             (
-                'Robert Diaz',
-                'Apartment 3B, 112 Riverside Avenue',
-                '+1 (555) 014-9982',
+                'Priya Das',
+                'Silchar, Assam',
+                '+91 91234 56789',
                 'Medical Supplies',
                 'High',
                 'Elderly resident needs essential insulin refills and basic first aid bandages. Floodwaters block the main road.',
@@ -84,9 +84,9 @@ def init_db():
                 'volunteer1'
             ),
             (
-                'The Martinez Family',
-                'North Gym Shelter (Cot #14)',
-                '+1 (555) 012-7364',
+                'The Arjun Singh',
+                'Flood Relief Camp, Tezpur, Assam',
+                '+91 70021 45678',
                 'Shelter & Clothing',
                 'Medium',
                 'Displaced after roof collapse. Requiring blankets, dry clothes, and baby formula for an 8-month-old.',
@@ -94,9 +94,9 @@ def init_db():
                 'volunteer2'
             ),
             (
-                'Elena Rostova',
-                'Block C, Oakridge Subdivison',
-                '+1 (555) 018-4721',
+                'Riya Chatterjee',
+                'Dibrugarh, Assam',
+                '+91 86384 98765',
                 'Search & Rescue',
                 'High',
                 'Reporting rising water levels around the ground floor. Need guidance or evacuation assistance before nightfall.',
@@ -104,9 +104,9 @@ def init_db():
                 None
             ),
             (
-                'Marcus Brody',
-                'Intersection of Elm & 5th St',
-                '+1 (555) 011-2358',
+                'Abhijeet Bhattacharya',
+                'Jorhat, Assam',
+                '+91 86384 98456',
                 'Other Support',
                 'Low',
                 'Downed powerlines and tree branches blocking the secondary driveway. No active hazard but limits vehicle exit.',

@@ -208,8 +208,8 @@ export default function App() {
             <Heart className="w-5 h-5 fill-white/10 text-white" />
           </div>
           <div>
-            <h1 className="font-bold text-sm leading-tight uppercase tracking-wider">RESQUE</h1>
-            <p className="text-[10px] text-indigo-200 font-mono font-medium">Command Center v2.4</p>
+            <h1 className="font-bold text-sm leading-tight uppercase tracking-wider">Disaster Relief Coordination System</h1>
+            <p className="text-[10px] text-indigo-200 font-mono font-medium">Emergency Response System</p>
           </div>
         </div>
 
@@ -294,9 +294,9 @@ export default function App() {
               <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
               <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-500"></span>
             </span>
-            <span className="font-medium text-slate-400">System Status: <span className="text-emerald-400 font-bold">Operational</span></span>
+            <span className="font-medium text-slate-400">System Status: <span className="text-emerald-400 font-bold">Online</span></span>
           </div>
-          <p className="text-[9px] text-slate-600 font-mono tracking-wider uppercase">Live SQLite Express Sync</p>
+          <p className="text-[9px] text-slate-600 font-mono tracking-wider uppercase">Connected to Database</p>
         </div>
       </aside>
 
@@ -318,14 +318,14 @@ export default function App() {
           </div>
           <div className="flex items-center gap-6">
             <div className="text-right hidden sm:block">
-              <p className="text-[10px] text-slate-400 font-mono uppercase tracking-wider">Active Incident</p>
-              <p className="text-xs font-semibold text-red-600">Tropical Storm Delta-4</p>
+              <p className="text-[10px] text-slate-400 font-mono uppercase tracking-wider">Current Disaster Event</p>
+              <p className="text-xs font-semibold text-red-600">Flood Emergency 2026-ASSAM</p>
             </div>
             <div className="flex items-center gap-2 border-l pl-6">
               <div className="w-8 h-8 rounded-full bg-slate-100 border border-slate-200 flex items-center justify-center text-xs font-bold font-mono text-slate-700">
                 AD
               </div>
-              <span className="text-xs font-bold text-slate-700">Project Admin</span>
+              <span className="text-xs font-bold text-slate-700">Administrator</span>
             </div>
           </div>
         </header>
@@ -393,7 +393,7 @@ export default function App() {
                           required
                           value={vicName}
                           onChange={e => setVicName(e.target.value)}
-                          placeholder="e.g. Sarah Jenkins or The Martinez Family"
+                          placeholder="e.g. Rahul Sharma or The Arjun Singh"
                           className="w-full px-3 py-2 bg-white border border-slate-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500/20 focus:border-indigo-500 transition-all placeholder:text-slate-400 text-xs"
                         />
                       </div>
@@ -800,7 +800,7 @@ export default function App() {
                         type="text"
                         value={adminSearch}
                         onChange={e => setAdminSearch(e.target.value)}
-                        placeholder="Search Sarah, Riverside..."
+                        placeholder="Search Abhijeet Bhattacharya, Riverside..."
                         className="w-full px-3 py-1.5 bg-white border border-slate-200 rounded-lg text-xs focus:outline-none focus:ring-2 focus:ring-indigo-500/20 focus:border-indigo-500 transition-all"
                       />
                     </div>
